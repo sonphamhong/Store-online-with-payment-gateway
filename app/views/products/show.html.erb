@@ -10,7 +10,9 @@
 <p>
   <%= image_tag @product.image, height: "300" %>
 </p>
-
+<p>
+  <%= @product.category.name if @product.category.present?%>
+</p>
 <p>
   <%= link_to "Add to cart", add_cart_path, method: :post, class: "btn btn-primary"%>
 </p>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   get 'orders/create'
 
   devise_for :users
