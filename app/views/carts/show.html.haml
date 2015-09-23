@@ -6,22 +6,26 @@
       %th Quantity
       %th Price
       %th Delete
-  -@cart_items.each do |item|
-    %tr
-      %td 
-        = link_to item.product.name, item.product
-      %td
-        = image_tag item.product.image.thumb
-      %td 
-        = item.quantity
-      %td 
-        = number_to_currency item.total_price
-      %td
-        = link_to "Delete", cart_path({type: "item", id: item.id}), method: :delete
-  %tfoot
-    %tr
-      %td.text-right(colspan=5)
-        %strong
-          = "Total: #{number_to_currency @cart.total_price}"
-%p
-  = link_to "Check out", checkout_cart_path, class: "btn btn-primary"
+  - if @cart_items.present?
+    -@cart_items.each do |item|
+      %tr
+        %td 
+          = link_to item.product.name, item.product
+        %td
+          = image_tag item.product.image.thumb
+        %td 
+          = item.quantity
+        %td 
+          = number_to_currency item.total_price
+        %td
+          = link_to "Delete", cart_path({type: "item", id: item.id}), method: :delete
+    %tfoot
+      %tr
+        %td.text-right(colspan=5)
+          %strong
+            = "Total: #{number_to_currency @cart.total_price}"
+      %tr
+        %td(colspan=5)
+          = link_to "Delete All", cart_path({type: "all"}), method: :delete, class: "btn btn-primary pull-right"
+    %p
+      = link_to "Check out", checkout_cart_path, class: "btn btn-primary"

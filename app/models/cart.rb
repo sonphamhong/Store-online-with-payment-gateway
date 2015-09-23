@@ -1,5 +1,5 @@
 class Cart < ActiveRecord::Base
-  has_many :items, class_name: "CartItem"
+  has_many :items, class_name: "CartItem", dependent: :destroy
 
   def self.create_cart product_id, session_id
     cart = Cart.create(session_id: session_id)

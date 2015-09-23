@@ -15,7 +15,11 @@ class CartsController < ApplicationController
   end
 
   def show
-    @cart_items = @cart.items.includes(:product)
+    if @cart.present?
+      @cart_items = @cart.items.includes(:product)
+    else
+      @cart_items = []
+    end
   end
 
   def checkout
@@ -24,10 +28,16 @@ class CartsController < ApplicationController
 
   def destroy
     type = params[:type]
-    if type = "item"
+    if type == "item"
       item = CartItem.find_by(params[:id])
       item.destroy()
+      notice = "Item has removed from cart"
+      url = :back
+    else
+      @cart.destroy
+      notice = "Cart has removed"
+      url = root_path
     end
-    redirect_to :back, notice: "Item has removed from cart"
+    redirect_to url, notice: notice
   end
 end
