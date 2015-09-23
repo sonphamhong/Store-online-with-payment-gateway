@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :find_categories
-
-  def initialize_cart
-    @cart = Cart.build_from_hash session
+  before_filter :configure_devise_params, if: :devise_controller?
+  def get_cart
+    @cart = Cart.find_by(session_id: session.id)
   end
 
   def find_categories
@@ -17,6 +17,12 @@ class ApplicationController < ActionController::Base
 
     unless current_user.admin?
       redirect_to root_path, alert: "You are not allowed to perform that operation."
+    end
+  end
+
+  def configure_devise_params
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :password, :password_confirmation, :name, :phone, :city, :address, :country, :postal_code)
     end
   end
 

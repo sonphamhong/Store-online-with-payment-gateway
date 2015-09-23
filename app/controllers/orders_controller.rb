@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_filter :initialize_cart
+  before_filter :get_cart
   def create
     @order_form = OrderForm.new(
       user: User.new(order_params[:user]),
