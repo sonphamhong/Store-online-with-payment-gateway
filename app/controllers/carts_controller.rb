@@ -15,10 +15,19 @@ class CartsController < ApplicationController
   end
 
   def show
-    @cart_items = @cart.items
+    @cart_items = @cart.items.includes(:product)
   end
 
   def checkout
     @order_form = OrderForm.new user: User.new
+  end
+
+  def destroy
+    type = params[:type]
+    if type = "item"
+      item = CartItem.find_by(params[:id])
+      item.destroy()
+    end
+    redirect_to :back, notice: "Item has removed from cart"
   end
 end

@@ -5,6 +5,7 @@
       %th Image
       %th Quantity
       %th Price
+      %th Delete
   -@cart_items.each do |item|
     %tr
       %td 
@@ -15,9 +16,11 @@
         = item.quantity
       %td 
         = number_to_currency item.total_price
+      %td
+        = link_to "Delete", cart_path({type: "item", id: item.id}), method: :delete
   %tfoot
     %tr
-      %td.text-right(colspan=4)
+      %td.text-right(colspan=5)
         %strong
           = "Total: #{number_to_currency @cart.total_price}"
 %p
