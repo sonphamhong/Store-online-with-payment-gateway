@@ -8,5 +8,7 @@ class User < ActiveRecord::Base
   validates :city, presence: true
   validates :postal_code, presence: true
   validates :phone, presence: true, format: { with: /\d{3}-\d{3}-\d{4}/, message: "bad format" }
-  validates :country, presence: true       
+  validates :country, presence: true
+
+  has_many :videos       
 end

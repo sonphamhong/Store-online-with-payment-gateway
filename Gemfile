@@ -51,7 +51,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'country_select'
 gem 'braintree'
-
+gem 'carrierwave-ffmpeg'
+gem "fog-aws"
 group :production do
   gem 'pg'
   gem 'rails_12factor'

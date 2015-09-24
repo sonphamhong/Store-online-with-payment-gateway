@@ -1,0 +1,14 @@
+<h1>
+  <%= @video.title %>
+</h1>
+<p>
+  <%= @video.description %>
+</p>
+<div class="video">
+  <video controls>
+    <source src="<%= @video.media %>" type="video/mp4"></source>
+  </video>
+</div>
+<%= link_to 'Edit', edit_video_path(@video) %>
+\|
+<%= link_to 'Back', videos_path %>

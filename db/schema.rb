@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923071217) do
+ActiveRecord::Schema.define(version: 20150924025422) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -90,5 +90,16 @@ ActiveRecord::Schema.define(version: 20150923071217) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "videos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "media"
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "videos", ["user_id"], name: "index_videos_on_user_id"
 
 end
