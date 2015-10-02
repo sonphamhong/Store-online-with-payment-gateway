@@ -57,7 +57,9 @@ gem 'country_select'
 gem 'braintree'
 gem 'carrierwave-ffmpeg'
 gem "fog-aws"
+gem 'carrierwave-video-thumbnailer'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+gem 'videojs_rails'

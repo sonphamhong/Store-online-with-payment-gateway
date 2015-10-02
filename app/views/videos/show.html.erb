@@ -5,9 +5,11 @@
   <%= @video.description %>
 </p>
 <div class="video">
-  <video controls>
+  <video controls width="620" height="360" loop poster="<%= @video.media.thumb.url%>">
     <source src="<%= @video.media %>" type="video/mp4"></source>
   </video>
+
+  <%= videojs_rails sources: { mp4: @video.media.url}, setup: "{}", controls: false, width:"400" %>
 </div>
 <%= link_to 'Edit', edit_video_path(@video) %>
 \|
